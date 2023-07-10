@@ -1,0 +1,30 @@
+.container {
+    background-color: #D8C4B6;
+    border-radius: 10px;
+    height: 630px;
+}
+
+.card {
+    background-color: #f5efe7;
+    border-color: #d8c4b6;
+    height: 350px;
+    width: 800px;
+    margin-top: 90px;
+}
+
+.card-header {
+    background-color: #4f709c;
+    color: #f5efe7;
+}
+
+.text-white {
+    color: #f5efe7 !important;
+}
+
+.text-muted {
+    color: #213555;
+}
+
+.gradient-custom .fa-lg {
+    color: #213555;
+}

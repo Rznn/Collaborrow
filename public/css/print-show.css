@@ -1,0 +1,68 @@
+.block-title{
+    padding: 15px 0 13px 0;
+    padding-bottom: 6px;
+    background: rgb(7, 75, 130);
+    color: white;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    border: 1px;
+    text-align: center;
+    box-shadow: 5px 5px 5px rgb(195, 191, 191), -5px -5px 5px rgb(255, 253, 253);
+}
+
+.card {
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(142, 141, 141), -5px -5px 5px rgb(232, 229, 229);
+}
+
+.card-item-image{
+    text-align: center;
+}
+
+.card-item-image img{
+    width:100%;
+    height: 261px;
+    border-radius: 20px;
+    object-fit: cover;  
+}
+
+.card-user-image{
+    text-align: center;
+}
+
+.card-user-image i{
+    font-size: 32px;
+}
+
+.card-item-info {
+    padding: 30px 30px 15px 30px;
+}
+
+.card-item-info h3{
+    border-bottom:1px solid black;
+    margin: 0 20px 10px 0;
+    padding-bottom: 10px;
+}
+
+.card-item-info p{
+    font-size: 16px;
+}
+
+.card-user-info {
+    padding: 10px 20px 3px 20px;
+}
+
+.card-booking-info{
+    padding: 30px 30px 15px 30px;
+}
+
+.card-booking-info h3{
+    border-bottom:1px solid black;
+    margin: 0 20px 10px 0;
+    padding-bottom: 10px;
+}
+
+.block-btn{
+    margin: 10px 0 19px 0;
+}

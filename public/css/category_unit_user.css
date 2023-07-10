@@ -1,0 +1,55 @@
+.table {
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+  }
+
+  .table td {
+      font-size: 14px;
+      width: 25%;
+  }
+
+  .table th {
+    background-color: #ede0ce;
+    padding: 10px 0 10px 0;
+  }
+
+  .table td:last-child form button.btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  .table th:last-child,
+  .table td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 10%;
+}
+
+th:nth-child(2),
+td:nth-child(2),
+th:nth-child(3),
+td:nth-child(3),
+th:nth-child(4),
+td:nth-child(4),
+th:nth-child(5),
+td:nth-child(5),
+th:nth-child(6),
+td:nth-child(6) {
+  width: 18%;
+}

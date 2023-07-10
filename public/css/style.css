@@ -1,0 +1,126 @@
+/* #F5EFE7
+#D8C4B6
+#4F709C
+#213555 */
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
+
+*{
+    font-family: 'Poppins', sans-serif
+}
+
+body {
+    background: rgb(255,255,255);
+    background: linear-gradient(185deg, rgba(255,255,255,1) 0%, rgba(245,239,231,1) 55%);
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.block-sidebar {
+    padding: 30px 10px 30px 30px;
+    height: 100vh;
+}
+
+.sidebar{
+    z-index: 1;
+    position: fixed;
+    border: transparent;
+    border-radius: 20px;
+    width: 280px;
+    height: 880px;
+    display: block;
+    background-color: #213555;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.block-main {
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 30px;
+}
+
+/* .block-navbar {
+    padding: 30px 20px 50px 10px;
+} */
+
+.navbar {
+    background-color: #213555;
+    width: 1553px;
+    border-radius: 18px;
+    border: transparent;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    z-index: 1;
+}
+
+.navbar-logout {
+    background-color: #F5EFE7;
+    border-radius: 11px;
+    margin-right: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.navbar-logout i{
+    font-size: 18px;
+    color: #213555;
+}
+
+.navbar-logout p {
+    font-size: 16px;
+    color: #213555;
+}
+
+.navbar-logout:hover {
+    background-color: #FFCDA8;
+}
+
+.container-header{
+    margin: auto;
+    border-radius: 20px 20px 0 0;
+    padding: 15px 5px 15px 5px;
+}
+
+.header-logo img {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.header-name{
+    padding-top: 25px;
+    padding-left: 0;
+}
+
+.header-name h5{
+    color: #F5EFE7;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.container-menu{
+    margin: 5px;
+    border-radius: 20px 20px 0 0;
+    padding: 15px 10px 15px 10px;
+}
+
+.container-menu a{
+    display: block;
+    border-radius: 12px;
+    text-decoration: none;
+    padding: 20px 5px;
+    color :#F5EFE7;
+    width: 100%;
+    padding-left: 30px;
+    margin-top: 5px;
+}
+
+.container-menu a:hover {
+    background-color: #4F709C;
+}
+
+.active {
+    background-color: #4F709C;
+}
+
+.content {
+    padding: 20px 30px 0 10px ;
+}
