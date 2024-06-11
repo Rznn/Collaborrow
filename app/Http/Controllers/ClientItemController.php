@@ -17,8 +17,10 @@ class ClientItemController extends Controller
     {
         $categories = Categories::all();
 
-        if ($request->categories || $request->search) {
+        if ($request->categories || $request->search || $request->status) {
             $items = Items::where(function ($query) use ($request) {
+                $status = $request->query('status');
+
                 if ($request->categories) {
                     $query->whereHas('categories', function ($q) use ($request) {
                         $q->where('categories.id', 'LIKE', '%' . $request->categories . '%');
@@ -30,10 +32,13 @@ class ClientItemController extends Controller
                     $query->orWhere('brand', 'LIKE', '%' . $request->search . '%');
                     $query->orWhere('description', 'LIKE', '%' . $request->search . '%');
                 }
-            })->get();
-        }
-        else {
-            $items = Items::all();
+
+                if ($request->status) {
+                    $query->orWhere('status', $status)->get();
+                }
+            })->paginate(6);
+        } else {
+            $items = Items::paginate(6);
         }
         return view('/item_list', [
             'items' => $items,
@@ -65,15 +70,15 @@ class ClientItemController extends Controller
             $users = Auth::user();
 
             if ($items->stock === 0) {
-                return redirect()->back()->with('error','Item is out of stock.')->withInput();
+                return redirect()->back()->with('error','Item is out of stock.');
             }
 
             if ($items->stock < $validate['stock']) {
-                return redirect()->back()->with('error','Requested quantity is more than available item.')->withInput();
+                return redirect()->back()->with('error','Requested quantity is more than available item.');
             }
 
             if ($request->booking_date > $request->return_date) {
-                return redirect()->back()->with('error','Booking date must be before the return date.')->withInput();
+                return redirect()->back()->with('error','Booking date must be before the return date.');
             }
 
             if($items['status'] != 'available') {

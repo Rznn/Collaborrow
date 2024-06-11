@@ -15,9 +15,17 @@ use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Items::all();
+        $query = Items::query();
+
+        if ($request->status) {
+            $status = $request->query('status');
+            $query->where('status', $status)->latest()->paginate(6);
+        }
+
+        $items = $query->latest()->paginate(6);
+
         return view('/items', [
             'items' => $items
         ]);

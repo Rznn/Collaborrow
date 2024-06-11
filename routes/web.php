@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => ['not_user', 'can:manage-crud-admin-adminunit']], function () {
         // items -> crud admin dan admin unit
-        Route::get('/items', [ItemController::class, 'index']);
+        Route::get('/items', [ItemController::class, 'index'])->name('items');
         Route::get('/item_add', [ItemController::class, 'add']);
         Route::post('/item_add', [ItemController::class, 'store']);
         Route::get('/item_edit/{slug}', [ItemController::class, 'edit']);
@@ -93,11 +93,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/item_restore/{slug}', [ItemController::class, 'restore']);
 
         // bookings
-        Route::get('/bookings', [BookingController::class, 'index']);
+        Route::get('/bookings', [BookingController::class, 'index'])->name('bookings');
         Route::get('/bookings/{id}/approve', [BookingController::class, 'approvebookings'])->name('approve_bookings');
         Route::get('/bookings/{id}/reject', [BookingController::class, 'rejectbookings'])->name('reject_bookings');
         Route::get('/bookings/{id}/confirm', [BookingController::class, 'confirmbookings'])->name('confirm_bookings');
         Route::get('/bookings/{id}/cancel', [BookingController::class, 'cancelbyadmin'])->name('cancel_bookings_byadmin');
+        Route::get('/bookings/{id}/ongoing', [BookingController::class, 'ongoingbyadmin'])->name('ongoing_bookings_byadmin');
     });
 
     Route::group(['middleware' => ['only_client', 'can:manage-crud-client']], function () {
@@ -105,14 +106,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', [ClientController::class, 'index']);
 
         //item list
-        Route::get('/item_list', [ClientItemController::class, 'index']);
+        Route::get('/item_list', [ClientItemController::class, 'index'])->name('item_list');
 
         // booking item
         Route::get('/book_item/{slug}', [ClientItemController::class, 'book']);
         Route::put('/book_item/{slug}', [ClientItemController::class, 'store']);
 
         //bookings
-        Route::get('/bookings_client', [ClientBookingController::class, 'index']);
+        Route::get('/bookings_client', [ClientBookingController::class, 'index'])->name('bookings_client');
         Route::get('/print.booking_show/{id}', [ClientBookingController::class, 'show']);
         Route::get('/print.booking_print/{id}', [ClientBookingController::class, 'print']);
         //cancel booking

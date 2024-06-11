@@ -43,3 +43,15 @@
   .text-bg-danger {
     background-color: rgba(252, 60, 60, 0.5) !important;
   }
+
+  .filter-buttons a{
+    /* border-radius: 12px 12px 0 0; */
+    background-color: white;
+    color: darkslategray;
+    border: 1px solid darkgrey;
+    font-size: 13px;
+}
+
+.pagination .page-link {
+    font-size: 13px; /* Sesuaikan dengan ukuran yang diinginkan */
+}

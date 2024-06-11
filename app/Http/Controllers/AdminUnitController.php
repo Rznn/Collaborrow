@@ -19,7 +19,7 @@ class AdminUnitController extends Controller
         $categoryCount = Categories::count();
         $itemCount = Items::count();
         $bookingCount = Bookings::count();
-        $bookings = Bookings::all();
+        $bookings = Bookings::latest()->get();
 
 
         return view('admin_unit_dashboard', [

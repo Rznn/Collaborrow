@@ -18,7 +18,7 @@ class ClientController extends Controller
         // Mendapatkan user yang sedang login
         $users = Auth::user();
         // Mengambil bookings
-        $bookings = Bookings::with(['items.users', 'items.units'])->where('user_id', $users->id)->get();
+        $bookings = Bookings::with(['items.users', 'items.units'])->where('user_id', $users->id)->latest()->get();
 
         $bookingsCount = Bookings::with(['items.users', 'items.units'])->where('user_id', $users->id)->count();
         $bookingsApprovedCount = Bookings::where('user_id', $users->id)->whereIn('status', ['approved'])->count();

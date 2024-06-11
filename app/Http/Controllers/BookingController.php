@@ -11,11 +11,40 @@ use Illuminate\Support\Facades\Gate;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Bookings::with(['items.users', 'items.units'])->get();
+        $query = Bookings::query();
+
+        if ($request->search) {
+            $search = $request->search;
+            $query->where(function ($query) use ($search) {
+                $query->whereHas('items', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('brand', 'LIKE', '%' . $search . '%')
+                        ->orWhere('description', 'LIKE', '%' . $search . '%');
+                })
+                ->orWhereHas('users', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%');
+                })
+                ->orWhereHas('items.users', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%');
+                })
+                ->orWhereHas('items.units', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%');
+                });
+            });
+        }
+
+        if ($request->status) {
+            $status = $request->query('status');
+            $query->where('status', $status)->latest()->paginate(8);
+        }
+
+        $bookings = $query->with(['items.users', 'items.units'])->latest()->paginate(8);
+
         return view('/bookings', [
             'bookings' => $bookings,
+            'status' => $request->status,
         ]);
     }
 
@@ -108,6 +137,11 @@ class BookingController extends Controller
             $bookings->status = 'canceled';
             $bookings->save();
 
+            $items = Items::findOrFail($bookings->item_id);
+            $items->stock += $bookings->stock;
+            $items->status = 'available';
+            $items->save();
+
             return redirect('/bookings')->with('success', 'Success Change Status');
         } else {
             return redirect('/')->with('error', 'Unauthorized access');
@@ -122,6 +156,23 @@ class BookingController extends Controller
             $bookings->save();
 
             return redirect('/bookings_client')->with('success', 'Success Change Status');
+        } else {
+            return redirect('/')->with('error', 'Unauthorized access');
+        }
+    }
+
+    public function ongoingbyadmin($id)
+    {
+        if (Gate::allows('manage-crud-admin-adminunit')) {
+            $bookings = Bookings::findOrFail($id);
+            if ($bookings->status !== 'approved') {
+                return redirect()->back()->with('error', 'Failed booking is not approved yet.');
+            }
+
+            $bookings->status = 'on_going';
+            $bookings->save();
+
+            return redirect('/bookings')->with('success', 'Success Change Status');
         } else {
             return redirect('/')->with('error', 'Unauthorized access');
         }

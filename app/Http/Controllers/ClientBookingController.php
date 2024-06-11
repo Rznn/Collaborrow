@@ -12,12 +12,22 @@ use Illuminate\Support\Facades\Gate;
 
 class ClientBookingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Mendapatkan user yang sedang login
         $users = Auth::user();
-        // Mengambil bookings
-        $bookings = Bookings::with(['items.users', 'items.units'])->where('user_id', $users->id)->get();
+
+        // Mengambil query builder untuk bookings
+        $query = Bookings::with(['items.users', 'items.units'])->where('user_id', $users->id);
+
+        // Jika terdapat parameter status pada URL, tambahkan kondisi pencarian berdasarkan status
+        if ($request->has('status')) {
+            $status = $request->input('status');
+            $query->where('status', $status);
+        }
+
+        // Eksekusi query builder dengan paginasi 8 data per halaman
+        $bookings = $query->latest()->paginate(8);
 
         return view('/bookings_client', [
             'bookings' => $bookings,

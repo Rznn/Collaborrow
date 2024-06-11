@@ -8,7 +8,7 @@
     <h1>User Booking List</h1>
 
     {{-- alert session --}}
-    <div class = "mt-4">
+    <div class = "mt-2">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -18,6 +18,16 @@
                 {{ session('error') }}
             </div>
         @endif
+    </div>
+
+    <h6 class="mt-3">Sort by Status</h6>
+
+    <div class="filter-buttons">
+        <a href="{{ route('bookings_client', ['status' => 'waiting']) }}" class="btn btn-primary {{ request()->get('status') === 'waiting' ? ' active' : '' }}">Waiting</a>
+        <a href="{{ route('bookings_client', ['status' => 'approved']) }}" class="btn btn-primary {{ request()->get('status') === 'approved' ? ' active' : '' }}">Approved</a>
+        <a href="{{ route('bookings_client', ['status' => 'on_going']) }}" class="btn btn-primary {{ request()->get('status') === 'on_going' ? ' active' : '' }}">On Going</a>
+        <a href="{{ route('bookings_client', ['status' => 'rejected']) }}" class="btn btn-primary {{ request()->get('status') === 'rejected' ? ' active' : '' }}">Rejected</a>
+        <a href="{{ route('bookings_client', ['status' => 'canceled']) }}" class="btn btn-primary {{ request()->get('status') === 'canceled' ? ' active' : '' }}">Canceled</a>
     </div>
 
     {{-- table --}}
@@ -41,7 +51,7 @@
             </thead>
             <tbody>
                 @foreach ($bookings as $item)
-                    <tr>
+                    <tr class="{{ $item->confirm_return_date == null ? '' : ($item->return_date < $item->confirm_return_date ? 'text-bg-danger' : 'text-bg-success') }}">
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->items->name }}</td>
                         <td>{{ $item->items->brand }}</td>
@@ -84,6 +94,10 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <div class="pagination d-flex justify-content-end">
+        {{ $bookings->appends(['status' => request('status')])->links() }}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

@@ -14,7 +14,7 @@
     </div>
 
     {{-- success add category --}}
-    <div class = "mt-5">
+    <div class="mt-3">
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -22,8 +22,16 @@
         @endif
     </div>
 
+    <h6>Sort by Status</h6>
+
+    <div class="filter-buttons">
+        <a href="{{ route('items', ['status' => 'available']) }}" class="btn btn-primary {{ request()->get('status') === 'available' ? ' active' : '' }}">Available</a>
+        <a href="{{ route('items', ['status' => 'not_available']) }}" class="btn btn-primary {{ request()->get('status') === 'not_available' ? ' active' : '' }}">Not Available</a>
+        <a href="{{ route('items', ['status' => 'used']) }}" class="btn btn-primary {{ request()->get('status') === 'used' ? ' active' : '' }}">In Used</a>
+    </div>
+
     {{-- table --}}
-    <div class="my-5">
+    <div class="my-3">
         <table class="table">
             <thead>
                 <tr>
@@ -70,6 +78,11 @@
             </tbody>
         </table>
     </div>
+
+    <div class="pagination d-flex justify-content-end me-4">
+        {{ $items->appends(['status' => request('status')])->links() }}
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>

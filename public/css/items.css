@@ -42,4 +42,17 @@
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.filter-buttons a{
+    /* border-radius: 12px 12px 0 0; */
+    background-color: white;
+    color: darkslategray;
+    border: 1px solid darkgrey;
+    font-size: 13px;
+}
+
+.pagination .page-link {
+    font-size: 13px; /* Sesuaikan dengan ukuran yang diinginkan */
 }

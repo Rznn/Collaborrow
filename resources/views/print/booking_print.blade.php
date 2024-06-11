@@ -104,7 +104,7 @@
         </ul>
         <p>
             <strong>
-                Please visit our unit to finalize the booking confirmation. Kindly ensure to handle the items with care and prevent any damage. In the event of any damage, a penalty fee will be imposed as agreed upon.
+                Please visit our unit to finalize the booking confirmation ( 3 days before booking date ). Kindly ensure to handle the items with care and prevent any damage. In the event of any damage, a penalty fee will be imposed as agreed upon.
             </strong>
         </p>
         <p>

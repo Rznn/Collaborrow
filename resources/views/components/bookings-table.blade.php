@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/adminadminunitdashboard.css') }}">
-<div>
-    <table class="table" style="overflow-y: scroll;">
+<div class="tableFixHead">
+    <table class="table">
         <thead>
             <tr>
                 <th>No</th>
@@ -14,7 +14,8 @@
                 <th>Status</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
+            <div>
             @foreach ($bookings as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -44,6 +45,7 @@
                     </td>
                 </tr>
             @endforeach
+            </div>
         </tbody>
     </table>
 </div>

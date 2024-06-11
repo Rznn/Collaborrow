@@ -4,6 +4,7 @@
 
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/itemlist.css') }}">
     <h1>Item List</h1>
 
@@ -44,7 +45,15 @@
         @endif
     </div>
 
-    {{-- table --}}
+    <h6>Sort by Status</h6>
+
+    <div class="filter-buttons">
+        <a href="{{ route('item_list', ['status' => 'available']) }}" class="btn btn-primary {{ request()->get('status') === 'available' ? ' active' : '' }}">Available</a>
+        <a href="{{ route('item_list', ['status' => 'not_available']) }}" class="btn btn-primary {{ request()->get('status') === 'not_available' ? ' active' : '' }}">Not Available</a>
+        <a href="{{ route('item_list', ['status' => 'used']) }}" class="btn btn-primary {{ request()->get('status') === 'used' ? ' active' : '' }}">In Used</a>
+    </div>
+
+    {{-- card --}}
     <div class="row pt-3">
         @foreach($items as $item)
             <div class="col-lg-2 col-md-3 col-sm-6 mb-3 d-flex">
@@ -72,5 +81,10 @@
             </div>
         @endforeach
     </div>
+
+    <div class="pagination d-flex justify-center-end mt-4">
+        {{ $items->appends(['status' => request('status')])->links() }}
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 @endsection

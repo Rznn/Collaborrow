@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use App\Models\Bookings;
-use Illuminate\Support\Carbon;
 use App\Http\Controllers\BookingController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
